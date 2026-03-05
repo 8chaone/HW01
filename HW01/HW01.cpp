@@ -1,20 +1,103 @@
-﻿// HW01.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
+﻿#include <iostream>
+using namespace std;
 
-#include <iostream>
+void setPotion(int count, int* p_HPPotion, int* p_MPPotion) {
+    *p_HPPotion = count;
+    *p_MPPotion = count;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    const int SIZE = 4;
+    int stat[SIZE] = { 0 };
+
+    while (1) {
+        cout << "HP와 MP를 입력해주세요: ";
+        cin >> stat[0] >> stat[1];
+
+        if (stat[0] > 50 && stat[1] > 50) {
+            break;
+        }
+        cout << "HP나 MP의 값이 너무 작습니다. 다시 입력해주세요." << endl;
+    }
+
+    while (1) {
+        cout << "공격력과 방어력을 입력해주세요: ";
+        cin >> stat[2] >> stat[3];
+
+        if (stat[2] > 0 && stat[3] > 0) {
+            break;
+        }
+        cout << "공격력이나 방어력의 값이 너무 작습니다. 다시 입력해주세요." << endl;
+    }
+
+    int choice = 0;
+    int HPPotion = 0;
+    int MPPotion = 0;
+
+    setPotion(5, &HPPotion, &MPPotion);
+
+    cout << "* 포션이 지급되었습니다. (HP, MP 포션 각 5개)" << endl;
+    cout << "=============================================" << endl;
+    cout << "<스탯 관리 시스템>" << endl;
+
+    while (1) {
+        cout << "번호를 선택해주세요: ";
+        cin >> choice;
+
+        if (choice == 0) {
+            cout << "프로그램을 종료합니다." << endl;
+            break;
+        }
+
+        switch (choice) {
+        case 1:
+            if (HPPotion <= 0) {
+                cout << "포션이 부족합니다." << endl;
+                continue;
+            }
+            stat[0] += 20;
+            HPPotion--;
+            cout << "* HP가 20 증가되었습니다. 포션이 1개 차감됩니다." << endl;
+            cout << "현재 HP: " << stat[0] << endl;
+            cout << "남은 포션 수: " << HPPotion << endl;
+            break;
+
+        case 2:
+            if (MPPotion <= 0) {
+                cout << "포션이 부족합니다." << endl;
+                continue;
+            }
+            stat[1] += 20;
+            MPPotion--;
+            cout << "* MP가 20 증가되었습니다. 포션이 1개 차감됩니다." << endl;
+            cout << "현재 MP: " << stat[1] << endl;
+            cout << "남은 포션 수: " << MPPotion << endl;
+            break;
+
+        case 3:
+            stat[2] *= 2;
+            cout << " * 공격력이 2배로 증가되었습니다." << endl;
+            cout << "현재 공격력: " << stat[2] << endl;
+            break;
+
+        case 4:
+            stat[3] *= 2;
+            cout << "* 방어력이 2배로 증가되었습니다." << endl;
+            cout << "현재 방어력: " << stat[3] << endl;
+            break;
+
+        case 5:
+            cout << "* HP : " << stat[0] << ", MP : " << stat[1] << ", 공격력 : " << stat[2] << ", 방어력 : " << stat[3] << endl;
+            break;
+
+        case 6:
+            HPPotion++;
+            MPPotion++;
+            cout << "* 레벨업! HP/MP 포션이 지급됩니다." << endl;
+            cout << "남은 HP/MP 포션 수 : " << HPPotion << "/" << MPPotion << endl;
+            break;
+        }
+    }
+    return 0;
 }
-
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
-
-// 시작을 위한 팁: 
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.
